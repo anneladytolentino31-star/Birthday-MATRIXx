@@ -162,7 +162,7 @@
 <body>
 
   <div id="start-overlay" onclick="launchExperience()">
-    <h2>Tap Anywhere to Begin 🎁</h2>
+    <h2>I hope you will like my simple gift ate🦋</h2>
     <p>Turn on audio for music</p>
   </div>
 
@@ -207,13 +207,13 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZHAPPYBIRTHDAY";
+    const pinkMatrixChars = "AILESMINEMYSISTERHAPPYBIRTHDAY";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
 
     // Sequence Phrases Matching Video Recording
-    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "CUTEE", "LITTLE", "GIRL", "💖"];
+    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE" "🦋"];
     let currentTextIndex = -1;
     let mode = "MATRIX"; 
 
