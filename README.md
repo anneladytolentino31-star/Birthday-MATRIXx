@@ -213,7 +213,7 @@
     let drops = Array(columns).fill(1);
 
     // Sequence Phrases Matching Video Recording
-    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE" "🦋"];
+    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE", "🦋"];
     let currentTextIndex = -1;
     let mode = "MATRIX"; 
 
