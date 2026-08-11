@@ -207,7 +207,7 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINEMYSISTERHAPPYBIRTHDAY";
+    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
