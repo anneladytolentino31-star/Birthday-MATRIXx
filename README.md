@@ -162,7 +162,7 @@
 <body>
 
   <div id="start-overlay" onclick="launchExperience()">
-    <h2>I HOPE YOU WILL LIKE MY SIMPLE GIFT🦋</h2>
+    <h2>I HOPE YOU LIKE MY SIMPLE GIFT🦋</h2>
     <p>Turn on audio for music</p>
   </div>
 
