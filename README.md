@@ -294,7 +294,7 @@
 
     // Organic Lava Swirl Controls
     let lavaTime = 0;
-    let fluidAlpha = 0;
+    let fluidAlpha = 0; // Starts at 0 (invisible), fades in when slide 1 appears
 
     function drawOrganicNeonLava() {
       if (fluidAlpha <= 0) return;
@@ -358,11 +358,15 @@
     }
 
     function renderLoop() {
-      if (mode === "STARS") {
+      if (mode === "SWIRL_ONLY") {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        if (fluidAlpha > 0 && fluidAlpha < 0.85) {
+          fluidAlpha += 0.015;
+        }
+
         drawOrganicNeonLava();
-        drawStars();
         requestAnimationFrame(renderLoop);
         return;
       }
@@ -409,41 +413,17 @@
     requestAnimationFrame(renderLoop);
 
     /* ----------------------------------------------------
-       2. STARFIELD BACKGROUND ENGINE
-       ---------------------------------------------------- */
-    const stars = Array.from({ length: 90 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: Math.random() * 2 + 1,
-      alpha: Math.random()
-    }));
-
-    function drawStars() {
-      stars.forEach(star => {
-        star.alpha += (Math.random() - 0.5) * 0.05;
-        if (star.alpha < 0.1) star.alpha = 0.1;
-        if (star.alpha > 1) star.alpha = 1;
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-    }
-
-    /* ----------------------------------------------------
-       3. TIMELINE SEQUENCE CONTROLLER
+       2. TIMELINE SEQUENCE CONTROLLER
        ---------------------------------------------------- */
     function startSequence() {
-      // Set swirl to start immediately at "3"
-      fluidAlpha = 0.05;
+      fluidAlpha = 0; // Keeps swirl hidden during matrix countdown
 
       const textInterval = setInterval(() => {
         currentTextIndex++;
 
         if (currentTextIndex >= textSequence.length) {
           clearInterval(textInterval);
-          mode = "STARS"; 
+          mode = "SWIRL_ONLY"; 
           startSlideshow();
         } else {
           mode = "TEXT";
@@ -453,11 +433,14 @@
     }
 
     /* ----------------------------------------------------
-       4. SLIDESHOW, HEART COLLAGE & ENVELOPE REVEAL
+       3. SLIDESHOW, HEART COLLAGE & ENVELOPE REVEAL
        ---------------------------------------------------- */
     function startSlideshow() {
       const slide1 = document.getElementById('slide-1');
       const slide2 = document.getElementById('slide-2');
+
+      // Trigger swirl animation to fade in right when Image 1 appears
+      fluidAlpha = 0.05;
 
       setTimeout(() => slide1.classList.add('active'), 800);
 
@@ -529,7 +512,7 @@
     }
 
     /* ----------------------------------------------------
-       5. USER INTERACTION & AUDIO
+       4. USER INTERACTION & AUDIO
        ---------------------------------------------------- */
     const bgMusic = document.getElementById('bg-music');
     let isPlaying = false;
