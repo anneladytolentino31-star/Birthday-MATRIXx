@@ -16,6 +16,7 @@
       color: #fff;
       font-family: Arial, sans-serif;
       overflow: hidden;
+      touch-action: none;
       height: 100vh;
       width: 100vw;
       display: flex;
@@ -484,26 +485,21 @@
     const bgMusic = document.getElementById('bg-music');
     let isPlaying = false;
 
-    function launchExperience() {
+        function launchExperience() {
+      // 1. Hide the start overlay
       document.getElementById('start-overlay').style.display = 'none';
+
+      // 2. Request True Full-Screen Presentation Mode
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen().catch(err => console.log("Fullscreen blocked: ", err));
+      } else if (elem.webkitRequestFullscreen) { /* Safari / iOS support */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 support */
+        elem.msRequestFullscreen();
+      }
+
+      // 3. Start Music & Animation Sequence
       toggleAudio();
       startSequence();
     }
-
-    function toggleAudio() {
-      if (isPlaying) {
-        bgMusic.pause();
-        document.getElementById('audio-toggle').textContent = '▶';
-        isPlaying = false;
-      } else {
-        bgMusic.play().then(() => {
-          isPlaying = true;
-          document.getElementById('audio-toggle').textContent = '⏸';
-        }).catch(() => {
-          isPlaying = false;
-        });
-      }
-    }
-  </script>
-</body>
-</html>
