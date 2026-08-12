@@ -312,12 +312,12 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
+    const pinkMatrixChars = "AILESMINEBIRTHDAY✨❤️";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
 
-    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE", "❤️"];
+    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "ATE", "AILESMINE", "❤️"];
     let currentTextIndex = -1;
     let mode = "MATRIX"; 
     let textPixels = [];
