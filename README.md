@@ -11,7 +11,7 @@
       padding: 0;
     }
 
-    body {
+    html, body {
       background-color: #000;
       color: #fff;
       font-family: Arial, sans-serif;
@@ -45,10 +45,11 @@
       pointer-events: none;
     }
 
+    /* Photo Cards */
     .photo-card {
       position: absolute;
-      width: 360px;
-      height: 360px;
+      width: 320px;
+      height: 320px;
       border-radius: 20px;
       overflow: hidden;
       border: 4px solid rgba(255, 182, 193, 0.9);
@@ -74,6 +75,7 @@
       transform: scale(1) rotate(0deg);
     }
 
+    /* Heart Collage Layout Container */
     #heart-container {
       position: absolute;
       width: 450px;
@@ -110,8 +112,8 @@
     /* 3D BOOK COVER & PAGE */
     #book-container {
       position: absolute;
-      width: 360px;
-      height: 480px;
+      width: 340px;
+      height: 460px;
       perspective: 1200px;
       display: none;
       pointer-events: auto;
@@ -151,13 +153,13 @@
     }
 
     .book-cover h2 {
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       text-shadow: 0 0 12px #ff0066;
       margin-bottom: 12px;
     }
 
     .book-cover p {
-      font-size: 1.1rem;
+      font-size: 1rem;
       opacity: 0.95;
     }
 
@@ -168,10 +170,10 @@
       background: rgba(20, 0, 10, 0.95);
       border: 3px solid #ff3388;
       border-radius: 16px;
-      padding: 30px;
+      padding: 25px;
       color: #ffe6f2;
-      font-size: 1.05rem;
-      line-height: 1.7;
+      font-size: 1rem;
+      line-height: 1.6;
       text-align: center;
       box-shadow: 0 0 35px rgba(255, 51, 136, 0.5);
       z-index: 1;
@@ -221,11 +223,28 @@
       font-size: 1.8rem;
       margin-bottom: 10px;
       text-shadow: 0 0 10px #ff0066;
+      text-align: center;
+      padding: 0 15px;
     }
 
     #start-overlay p {
       color: #ccc;
       font-size: 1rem;
+    }
+
+    /* Mobile Scaling Adjustment */
+    @media (max-width: 480px) {
+      .photo-card {
+        width: 280px;
+        height: 280px;
+      }
+      #heart-container {
+        transform: scale(0.8);
+      }
+      #book-container {
+        width: 290px;
+        height: 400px;
+      }
     }
   </style>
 </head>
@@ -258,7 +277,7 @@
       <div class="book" id="my-book">
         <div class="book-cover" onclick="openBook()">
           <h2>To Ate Ailesmine</h2>
-          <p>Tap to open your letter</p>
+          <p>Tap to open your letter 📖</p>
         </div>
         <div class="book-page">
           <h3 style="color: #ff66b2; margin-bottom: 12px; text-shadow: 0 0 10px #ff0066;">Happy Birthday! 🎉</h3>
@@ -290,12 +309,11 @@
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
 
-    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE", "🦋"];
+    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE", "❤️"];
     let currentTextIndex = -1;
     let mode = "MATRIX"; 
     let textPixels = [];
 
-    // Samples text pixel locations to draw matrix particle words
     function createTextPixels(text) {
       const offCanvas = document.createElement('canvas');
       offCanvas.width = canvas.width;
@@ -303,7 +321,7 @@
       const offCtx = offCanvas.getContext('2d');
 
       offCtx.fillStyle = '#ffffff';
-      offCtx.font = 'bold 90px Arial';
+      offCtx.font = 'bold 80px Arial';
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
       offCtx.fillText(text, canvas.width / 2, canvas.height / 2);
@@ -426,7 +444,7 @@
       setTimeout(() => {
         slide2.classList.remove('active');
         buildHeartCollage();
-      }, 6500);
+      }, 7500);
     }
 
     const heartGrid = [
@@ -472,7 +490,7 @@
       setTimeout(() => {
         container.style.display = 'none';
         document.getElementById('book-container').classList.add('show');
-      }, (heartGrid.length * 110) + 4500);
+      }, (heartGrid.length * 130) + 3500);
     }
 
     function openBook() {
@@ -485,21 +503,36 @@
     const bgMusic = document.getElementById('bg-music');
     let isPlaying = false;
 
-        function launchExperience() {
-      // 1. Hide the start overlay
+    function launchExperience() {
       document.getElementById('start-overlay').style.display = 'none';
 
-      // 2. Request True Full-Screen Presentation Mode
       const elem = document.documentElement;
       if (elem.requestFullscreen) {
         elem.requestFullscreen().catch(err => console.log("Fullscreen blocked: ", err));
-      } else if (elem.webkitRequestFullscreen) { /* Safari / iOS support */
+      } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 support */
+      } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
       }
 
-      // 3. Start Music & Animation Sequence
       toggleAudio();
       startSequence();
     }
+
+    function toggleAudio() {
+      if (isPlaying) {
+        bgMusic.pause();
+        document.getElementById('audio-toggle').textContent = '▶';
+        isPlaying = false;
+      } else {
+        bgMusic.play().then(() => {
+          isPlaying = true;
+          document.getElementById('audio-toggle').textContent = '⏸';
+        }).catch(() => {
+          isPlaying = false;
+        });
+      }
+    }
+  </script>
+</body>
+</html>
