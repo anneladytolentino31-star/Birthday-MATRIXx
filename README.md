@@ -109,11 +109,11 @@
       transform: scale(1);
     }
 
-    /* 3D BOOK COVER & PAGE */
+    /* 3D ENVELOPE / BOOK CONTAINER */
     #book-container {
       position: absolute;
       width: 340px;
-      height: 460px;
+      height: 480px;
       perspective: 1200px;
       display: none;
       pointer-events: auto;
@@ -136,48 +136,32 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, #ff3388, #ff85c0);
-      border: 3px solid #ff99cc;
+      background: none;
+      border: none;
+      box-shadow: 0 0 35px rgba(255, 51, 136, 0.4);
       border-radius: 16px;
-      box-shadow: 0 0 35px rgba(255, 51, 136, 0.6);
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      color: #fff;
       transform-origin: left;
       transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
       z-index: 2;
       cursor: pointer;
       backface-visibility: hidden;
-    }
-
-    .book-cover h2 {
-      font-size: 1.8rem;
-      text-shadow: 0 0 12px #ff0066;
-      margin-bottom: 12px;
-    }
-
-    .book-cover p {
-      font-size: 1rem;
-      opacity: 0.95;
+      padding: 0;
     }
 
     .book-page {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: rgba(20, 0, 10, 0.95);
-      border: 3px solid #ff3388;
+      background: none;
+      border: none;
+      box-shadow: 0 0 35px rgba(255, 51, 136, 0.4);
       border-radius: 16px;
-      padding: 25px;
-      color: #ffe6f2;
-      font-size: 1rem;
-      line-height: 1.6;
-      text-align: center;
-      box-shadow: 0 0 35px rgba(255, 51, 136, 0.5);
+      padding: 0;
       z-index: 1;
-      overflow-y: auto;
+      overflow: hidden;
     }
 
     .book.open .book-cover {
@@ -232,7 +216,6 @@
       font-size: 1rem;
     }
 
-    /* Mobile Scaling Adjustment */
     @media (max-width: 480px) {
       .photo-card {
         width: 280px;
@@ -242,8 +225,8 @@
         transform: scale(0.8);
       }
       #book-container {
-        width: 290px;
-        height: 400px;
+        width: 300px;
+        height: 430px;
       }
     }
   </style>
@@ -276,15 +259,10 @@
     <div id="book-container">
       <div class="book" id="my-book">
         <div class="book-cover" onclick="openBook()">
-          <h2>To Ate Ailesmine</h2>
-          <p>Tap to open your letter 📖</p>
+          <img src="cover.png" alt="Envelope Cover" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;">
         </div>
         <div class="book-page">
-          <h3 style="color: #ff66b2; margin-bottom: 12px; text-shadow: 0 0 10px #ff0066;">Happy Birthday! 🎉</h3>
-          <p>
-            I just want to say how grateful I am to have you as my sister. Thank you for always guiding me and for all your love and support. I wish you all the best in life because you deserve it! Enjoy your special day!<br><br>
-            Love always, Anne 💖
-          </p>
+          <img src="letter.png" alt="Inside Letter" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;">
         </div>
       </div>
     </div>
@@ -304,7 +282,7 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
+    const pinkMatrixChars = "AILESMINEBIRTHDAY✨❤️";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
@@ -320,14 +298,12 @@
       offCanvas.height = canvas.height;
       const offCtx = offCanvas.getContext('2d');
 
-      // Dynamically calculate font size based on screen width
       let dynamicFontSize = Math.min(canvas.width * 0.18, 140); 
       if (text.length > 7) {
         dynamicFontSize = Math.min(canvas.width * 0.12, 100);
       }
 
       offCtx.fillStyle = '#ffffff';
-      // Fixed: Uses backticks (`) to properly format the string with dynamic variables
       offCtx.font = `bold ${dynamicFontSize}px Arial`;
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
@@ -435,7 +411,7 @@
     }
 
     /* ----------------------------------------------------
-       4. SLIDESHOW, HEART COLLAGE & BOOK REVEAL
+       4. SLIDESHOW, HEART COLLAGE & ENVELOPE REVEAL
        ---------------------------------------------------- */
     function startSlideshow() {
       const slide1 = document.getElementById('slide-1');
