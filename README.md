@@ -1,4 +1,3 @@
-# Birthday-MATRIXx
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +106,7 @@
       transform: scale(1);
     }
 
-    /* 3D BOOK COVER */
+    /* 3D BOOK COVER & PAGE */
     #book-container {
       position: absolute;
       width: 320px;
@@ -232,7 +231,7 @@
 <body>
 
   <div id="start-overlay" onclick="launchExperience()">
-    <h2>I HOPE YOU WILL LIKE MY SIMPLE GIFT🦋</h2>
+    <h2>I HOPE YOU LIKE MY SIMPLE GIFT🦋</h2>
     <p>Turn on audio for music</p>
   </div>
 
@@ -285,7 +284,7 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINEMYSISTERHAPPYBIRTHDAY";
+    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
@@ -295,7 +294,7 @@
     let mode = "MATRIX"; 
     let textPixels = [];
 
-    // Sample pixels of text to build matrix-particle form
+    // Samples text pixel locations to draw matrix particle words
     function createTextPixels(text) {
       const offCanvas = document.createElement('canvas');
       offCanvas.width = canvas.width;
@@ -310,7 +309,7 @@
 
       const imgData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
       const points = [];
-      const step = 8; // Pixel grid spacing
+      const step = 8;
 
       for (let y = 0; y < canvas.height; y += step) {
         for (let x = 0; x < canvas.width; x += step) {
@@ -352,7 +351,6 @@
         ctx.shadowBlur = 12;
         ctx.font = '12px monospace';
 
-        // Draw character blocks at sampled pixel positions to create matrix text effect
         for (let i = 0; i < textPixels.length; i++) {
           const pt = textPixels[i];
           const char = pinkMatrixChars.charAt((i + Math.floor(Date.now() / 100)) % pinkMatrixChars.length);
@@ -478,353 +476,6 @@
 
     function openBook() {
       document.getElementById('my-book').classList.add('open');
-    }
-
-    /* ----------------------------------------------------
-       5. USER INTERACTION & AUDIO
-       ---------------------------------------------------- */
-    const bgMusic = document.getElementById('bg-music');
-    let isPlaying = false;
-
-    function launchExperience() {
-      document.getElementById('start-overlay').style.display = 'none';
-      toggleAudio();
-      startSequence();
-    }
-
-    function toggleAudio() {
-      if (isPlaying) {
-        bgMusic.pause();
-        document.getElementById('audio-toggle').textContent = '▶';
-        isPlaying = false;
-      } else {
-        bgMusic.play().then(() => {
-          isPlaying = true;
-          document.getElementById('audio-toggle').textContent = '⏸';
-        }).catch(() => {
-          isPlaying = false;
-        });
-      }
-    }
-  </script>
-</body>
-</html>
-
-    /* Container for overlay elements */
-    #content-layer {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      pointer-events: none;
-    }
-
-    /* Slideshow Image Styles */
-    .photo-card {
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 3px solid rgba(255, 182, 193, 0.9);
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
-      background: #111;
-      opacity: 0;
-      transform: scale(0.8) rotate(-3deg);
-      transition: all 0.8s ease-in-out;
-      pointer-events: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .photo-card img, .photo-card svg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .photo-card.active {
-      opacity: 1;
-      transform: scale(1) rotate(0deg);
-    }
-
-    /* Heart Collage Layout Container */
-    #heart-container {
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      display: none;
-      pointer-events: auto;
-    }
-
-    .heart-tile {
-      position: absolute;
-      width: 65px;
-      height: 65px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 2px solid #ff99cc;
-      box-shadow: 0 0 12px #ff66a3;
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      background: #222;
-    }
-
-    .heart-tile img, .heart-tile svg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .heart-tile.pop {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    /* Music Control Button */
-    .audio-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 44px;
-      height: 44px;
-      background: #ff3388;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 10;
-      box-shadow: 0 0 12px rgba(255, 51, 136, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    /* Click to Start Overlay */
-    #start-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 20;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    #start-overlay h2 {
-      color: #ff66b2;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-      text-shadow: 0 0 10px #ff0066;
-    }
-
-    #start-overlay p {
-      color: #ccc;
-      font-size: 1rem;
-    }
-  </style>
-</head>
-<body>
-
-  <div id="start-overlay" onclick="launchExperience()">
-    <h2>I HOPE YOU LIKE MY SIMPLE GIFT🦋</h2>
-    <p>Turn on audio for music</p>
-  </div>
-
-  <audio id="bg-music" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=happy-birthday-113885.mp3" type="audio/mpeg">
-  </audio>
-
-  <button class="audio-btn" id="audio-toggle" onclick="toggleAudio()">⏸</button>
-
-  <canvas id="bg-canvas"></canvas>
-
-  <div id="content-layer">
-    <div class="photo-card" id="slide-1">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <rect width="200" height="200" fill="#ffb3d9"/>
-        <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="45">🎂</text>
-        <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="#cc0066" font-family="sans-serif" font-weight="bold">Happy Birthday!</text>
-      </svg>
-    </div>
-    <div class="photo-card" id="slide-2">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <rect width="200" height="200" fill="#ffe6f2"/>
-        <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-size="45">🥳</text>
-        <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" font-size="16" fill="#cc0066" font-family="sans-serif" font-weight="bold">Best Sister Ever!</text>
-      </svg>
-    </div>
-
-    <div id="heart-container"></div>
-  </div>
-
-  <script>
-    /* ----------------------------------------------------
-       1. CANVAS MATRIX & TEXT ANIMATION ENGINE
-       ---------------------------------------------------- */
-    const canvas = document.getElementById('bg-canvas');
-    const ctx = canvas.getContext('2d');
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
-    const fontSize = 14;
-    let columns = Math.floor(canvas.width / fontSize);
-    let drops = Array(columns).fill(1);
-
-    // Sequence Phrases Matching Video Recording
-    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE", "🦋"];
-    let currentTextIndex = -1;
-    let mode = "MATRIX"; 
-
-    function drawMatrix() {
-      if (mode === "STARS") {
-        drawStars();
-        return;
-      }
-
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = '#ff3388'; 
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const char = pinkMatrixChars.charAt(Math.floor(Math.random() * pinkMatrixChars.length));
-        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-
-      // Render Pink Pixelated Text Overlay
-      if (mode === "TEXT" && currentTextIndex >= 0) {
-        ctx.fillStyle = '#ff66b2';
-        ctx.shadowColor = '#ff0066';
-        ctx.shadowBlur = 18;
-        ctx.font = 'bold 52px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(textSequence[currentTextIndex], canvas.width / 2, canvas.height / 2);
-        ctx.shadowBlur = 0;
-      }
-    }
-
-    setInterval(drawMatrix, 33);
-
-    /* ----------------------------------------------------
-       2. STARFIELD BACKGROUND ENGINE
-       ---------------------------------------------------- */
-    const stars = Array.from({ length: 90 }, () => ({
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      size: Math.random() * 2 + 1,
-      alpha: Math.random()
-    }));
-
-    function drawStars() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      stars.forEach(star => {
-        star.alpha += (Math.random() - 0.5) * 0.05;
-        if (star.alpha < 0.1) star.alpha = 0.1;
-        if (star.alpha > 1) star.alpha = 1;
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-    }
-
-    /* ----------------------------------------------------
-       3. TIMELINE SEQUENCE CONTROLLER
-       ---------------------------------------------------- */
-    function startSequence() {
-      const textInterval = setInterval(() => {
-        currentTextIndex++;
-        mode = "TEXT";
-
-        if (currentTextIndex >= textSequence.length) {
-          clearInterval(textInterval);
-          mode = "STARS"; 
-          startSlideshow();
-        }
-      }, 1000);
-    }
-
-    /* ----------------------------------------------------
-       4. SLIDESHOW & HEART COLLAGE BUILDER
-       ---------------------------------------------------- */
-    function startSlideshow() {
-      const slide1 = document.getElementById('slide-1');
-      const slide2 = document.getElementById('slide-2');
-
-      setTimeout(() => slide1.classList.add('active'), 500);
-
-      setTimeout(() => {
-        slide1.classList.remove('active');
-        slide2.classList.add('active');
-      }, 3500);
-
-      setTimeout(() => {
-        slide2.classList.remove('active');
-        buildHeartCollage();
-      }, 6500);
-    }
-
-    // Heart Coordinate Grid
-    const heartGrid = [
-      {x: 0, y: -2}, {x: -1, y: -3}, {x: -2, y: -2}, {x: -3, y: -1},
-      {x: -3, y: 0}, {x: -2, y: 1}, {x: -1, y: 2}, {x: 0, y: 3},
-      {x: 1, y: 2}, {x: 2, y: 1}, {x: 3, y: 0}, {x: 3, y: -1},
-      {x: 2, y: -2}, {x: 1, y: -3}, {x: 0, y: 0}, {x: -1, y: -1},
-      {x: 1, y: -1}
-    ];
-
-    function buildHeartCollage() {
-      const container = document.getElementById('heart-container');
-      container.style.display = 'block';
-
-      heartGrid.forEach((pos, index) => {
-        const tile = document.createElement('div');
-        tile.className = 'heart-tile';
-        
-        tile.style.left = (155 + pos.x * 45) + 'px';
-        tile.style.top = (155 + pos.y * 45) + 'px';
-
-        // High quality inline placeholder SVG
-        tile.innerHTML = `
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" fill="${index % 2 === 0 ? '#ffb3d9' : '#ff99c8'}"/>
-            <text x="50" y="55" dominant-baseline="middle" text-anchor="middle" font-size="30">💖</text>
-          </svg>`;
-
-        container.appendChild(tile);
-
-        setTimeout(() => {
-          tile.classList.add('pop');
-        }, index * 110);
-      });
     }
 
     /* ----------------------------------------------------
