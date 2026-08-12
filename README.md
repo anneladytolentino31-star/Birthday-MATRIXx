@@ -51,7 +51,7 @@
       width: 320px;
       height: 320px;
       border-radius: 20px;
-      overflow: hidden;
+      overflow: visible; /* FIXED: Allows top date header to overflow and be visible */
       border: 4px solid rgba(255, 182, 193, 0.9);
       box-shadow: 0 0 35px rgba(255, 105, 180, 0.6);
       background: #111;
@@ -69,6 +69,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 16px; /* Keeps image corners rounded inside card frame */
     }
 
     .photo-card.active {
@@ -76,22 +77,23 @@
       transform: scale(1) rotate(0deg);
     }
 
-    /* Styled Floating Date Above Pictures */
+    /* Styled Floating Date Header Above Pictures */
     .card-date-header {
       position: absolute;
-      top: -55px;
+      top: -60px;
       font-family: 'Cinzel', 'Trebuchet MS', Georgia, serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: bold;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       color: #ffe6f2;
       text-shadow: 0 0 10px #ff007f, 0 0 20px #ff0055, 0 0 30px #ff3388;
-      background: rgba(20, 0, 10, 0.75);
+      background: rgba(20, 0, 10, 0.85);
       padding: 6px 18px;
       border-radius: 20px;
       border: 1.5px solid rgba(255, 153, 204, 0.8);
-      box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
       white-space: nowrap;
+      z-index: 5;
     }
 
     /* Heart Collage Layout Container */
@@ -241,9 +243,10 @@
         height: 280px;
       }
       .card-date-header {
-        font-size: 1rem;
-        top: -48px;
+        font-size: 0.95rem;
+        top: -50px;
         letter-spacing: 2px;
+        padding: 5px 14px;
       }
       #heart-container {
         transform: scale(0.8);
@@ -321,7 +324,7 @@
 
     // Organic Lava Swirl Controls
     let lavaTime = 0;
-    let fluidAlpha = 0; // Starts at 0 (invisible), fades in when slide 1 appears
+    let fluidAlpha = 0;
 
     function drawOrganicNeonLava() {
       if (fluidAlpha <= 0) return;
@@ -466,7 +469,6 @@
       const slide1 = document.getElementById('slide-1');
       const slide2 = document.getElementById('slide-2');
 
-      // Trigger swirl animation to fade in right when Image 1 appears
       fluidAlpha = 0.05;
 
       setTimeout(() => slide1.classList.add('active'), 800);
