@@ -321,13 +321,13 @@
       const offCtx = offCanvas.getContext('2d');
 
       // Dynamically calculate font size based on screen width
-      // Scale down slightly for longer words like "AILESMINE" so they don't overflow
       let dynamicFontSize = Math.min(canvas.width * 0.18, 140); 
       if (text.length > 7) {
         dynamicFontSize = Math.min(canvas.width * 0.12, 100);
       }
 
       offCtx.fillStyle = '#ffffff';
+      // Fixed: Uses backticks (`) to properly format the string with dynamic variables
       offCtx.font = `bold ${dynamicFontSize}px Arial`;
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
