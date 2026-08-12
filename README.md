@@ -320,15 +320,22 @@
       offCanvas.height = canvas.height;
       const offCtx = offCanvas.getContext('2d');
 
+      // Dynamically calculate font size based on screen width
+      // Scale down slightly for longer words like "AILESMINE" so they don't overflow
+      let dynamicFontSize = Math.min(canvas.width * 0.18, 140); 
+      if (text.length > 7) {
+        dynamicFontSize = Math.min(canvas.width * 0.12, 100);
+      }
+
       offCtx.fillStyle = '#ffffff';
-      offCtx.font = 'bold 80px Arial';
+      offCtx.font = 'bold ${dynamicFontSize}px Arial';
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
       offCtx.fillText(text, canvas.width / 2, canvas.height / 2);
 
       const imgData = offCtx.getImageData(0, 0, canvas.width, canvas.height);
       const points = [];
-      const step = 8;
+      const step = 6;
 
       for (let y = 0; y < canvas.height; y += step) {
         for (let x = 0; x < canvas.width; x += step) {
