@@ -46,12 +46,12 @@
 
     .photo-card {
       position: absolute;
-      width: 300px;
-      height: 300px;
-      border-radius: 16px;
+      width: 360px;
+      height: 360px;
+      border-radius: 20px;
       overflow: hidden;
-      border: 3px solid rgba(255, 182, 193, 0.9);
-      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
+      border: 4px solid rgba(255, 182, 193, 0.9);
+      box-shadow: 0 0 35px rgba(255, 105, 180, 0.6);
       background: #111;
       opacity: 0;
       transform: scale(0.8) rotate(-3deg);
@@ -75,20 +75,20 @@
 
     #heart-container {
       position: absolute;
-      width: 380px;
-      height: 380px;
+      width: 450px;
+      height: 450px;
       display: none;
       pointer-events: auto;
     }
 
     .heart-tile {
       position: absolute;
-      width: 65px;
-      height: 65px;
-      border-radius: 12px;
+      width: 75px;
+      height: 75px;
+      border-radius: 14px;
       overflow: hidden;
       border: 2px solid #ff99cc;
-      box-shadow: 0 0 12px #ff66a3;
+      box-shadow: 0 0 15px #ff66a3;
       opacity: 0;
       transform: scale(0);
       transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -109,8 +109,8 @@
     /* 3D BOOK COVER & PAGE */
     #book-container {
       position: absolute;
-      width: 320px;
-      height: 420px;
+      width: 360px;
+      height: 480px;
       perspective: 1200px;
       display: none;
       pointer-events: auto;
@@ -134,9 +134,9 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(135deg, #ff3388, #ff85c0);
-      border: 2px solid #ff99cc;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255, 51, 136, 0.6);
+      border: 3px solid #ff99cc;
+      border-radius: 16px;
+      box-shadow: 0 0 35px rgba(255, 51, 136, 0.6);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -150,14 +150,14 @@
     }
 
     .book-cover h2 {
-      font-size: 1.6rem;
-      text-shadow: 0 0 10px #ff0066;
-      margin-bottom: 10px;
+      font-size: 1.9rem;
+      text-shadow: 0 0 12px #ff0066;
+      margin-bottom: 12px;
     }
 
     .book-cover p {
-      font-size: 0.9rem;
-      opacity: 0.9;
+      font-size: 1.1rem;
+      opacity: 0.95;
     }
 
     .book-page {
@@ -165,14 +165,14 @@
       width: 100%;
       height: 100%;
       background: rgba(20, 0, 10, 0.95);
-      border: 2px solid #ff3388;
-      border-radius: 12px;
-      padding: 25px;
+      border: 3px solid #ff3388;
+      border-radius: 16px;
+      padding: 30px;
       color: #ffe6f2;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      font-size: 1.05rem;
+      line-height: 1.7;
       text-align: center;
-      box-shadow: 0 0 30px rgba(255, 51, 136, 0.5);
+      box-shadow: 0 0 35px rgba(255, 51, 136, 0.5);
       z-index: 1;
       overflow-y: auto;
     }
@@ -256,14 +256,14 @@
     <div id="book-container">
       <div class="book" id="my-book">
         <div class="book-cover" onclick="openBook()">
-          <h2>To Ate Ailesmine 🦋</h2>
-          <p>Tap to open your letter 📖</p>
+          <h2>To Ate Ailesmine</h2>
+          <p>Tap to open your letter</p>
         </div>
         <div class="book-page">
           <h3 style="color: #ff66b2; margin-bottom: 12px; text-shadow: 0 0 10px #ff0066;">Happy Birthday! 🎉</h3>
           <p>
             I just want to say how grateful I am to have you as my sister. Thank you for always guiding me and for all your love and support. I wish you all the best in life because you deserve it! Enjoy your special day!<br><br>
-            Love always, Keanu 💖
+            Love always, Anne 💖
           </p>
         </div>
       </div>
@@ -405,7 +405,7 @@
           mode = "TEXT";
           textPixels = createTextPixels(textSequence[currentTextIndex]);
         }
-      }, 1200);
+      }, 2000);
     }
 
     /* ----------------------------------------------------
@@ -415,12 +415,12 @@
       const slide1 = document.getElementById('slide-1');
       const slide2 = document.getElementById('slide-2');
 
-      setTimeout(() => slide1.classList.add('active'), 500);
+      setTimeout(() => slide1.classList.add('active'), 800);
 
       setTimeout(() => {
         slide1.classList.remove('active');
         slide2.classList.add('active');
-      }, 3500);
+      }, 4000);
 
       setTimeout(() => {
         slide2.classList.remove('active');
@@ -453,8 +453,8 @@
         const tile = document.createElement('div');
         tile.className = 'heart-tile';
         
-        tile.style.left = (155 + pos.x * 45) + 'px';
-        tile.style.top = (155 + pos.y * 45) + 'px';
+        tile.style.left = (180 + pos.x * 55) + 'px';
+        tile.style.top = (180 + pos.y * 55) + 'px';
 
         const img = document.createElement('img');
         img.src = heartPhotos[index % heartPhotos.length];
@@ -465,13 +465,13 @@
 
         setTimeout(() => {
           tile.classList.add('pop');
-        }, index * 110);
+        }, index * 130);
       });
 
       setTimeout(() => {
         container.style.display = 'none';
         document.getElementById('book-container').classList.add('show');
-      }, (heartGrid.length * 110) + 2500);
+      }, (heartGrid.length * 110) + 4500);
     }
 
     function openBook() {
