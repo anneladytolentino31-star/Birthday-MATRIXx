@@ -328,7 +328,7 @@
       }
 
       offCtx.fillStyle = '#ffffff';
-      offCtx.font = 'bold ${dynamicFontSize}px Arial';
+      offCtx.font = `bold ${dynamicFontSize}px Arial`;
       offCtx.textAlign = 'center';
       offCtx.textBaseline = 'middle';
       offCtx.fillText(text, canvas.width / 2, canvas.height / 2);
