@@ -270,7 +270,7 @@
 
   <script>
     /* ----------------------------------------------------
-       1. PIXELATED MATRIX TEXT FORMATION ENGINE
+       1. PIXELATED MATRIX TEXT & NEON PINK SWIRL ENGINE
        ---------------------------------------------------- */
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
@@ -282,7 +282,7 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINEBIRTHDAY✨❤️";
+    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
@@ -291,6 +291,41 @@
     let currentTextIndex = -1;
     let mode = "MATRIX"; 
     let textPixels = [];
+
+    // Abstract Dynamic Neon Pink Swirl Parameters
+    let swirlAngle = 0;
+
+    function drawNeonPinkSwirl() {
+      swirlAngle += 0.02;
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const maxRadius = Math.max(canvas.width, canvas.height) * 0.7;
+
+      ctx.save();
+      ctx.lineWidth = 14;
+      ctx.shadowBlur = 30;
+      ctx.shadowColor = '#ff007f';
+
+      for (let i = 0; i < 4; i++) {
+        ctx.beginPath();
+        const offset = (Math.PI / 2) * i;
+        ctx.strokeStyle = i % 2 === 0 ? 'rgba(255, 20, 147, 0.25)' : 'rgba(255, 105, 180, 0.2)';
+
+        for (let a = 0; a < Math.PI * 4; a += 0.1) {
+          const r = (a / (Math.PI * 4)) * maxRadius;
+          const x = centerX + r * Math.cos(a + swirlAngle + offset);
+          const y = centerY + r * Math.sin(a + swirlAngle * 1.2 + offset);
+
+          if (a === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
 
     function createTextPixels(text) {
       const offCanvas = document.createElement('canvas');
@@ -331,8 +366,12 @@
         return;
       }
 
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+      // Dark background trail effect
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.18)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Render Dynamic Neon Swirl in Background
+      drawNeonPinkSwirl();
 
       if (mode === "MATRIX") {
         ctx.fillStyle = '#ff3388';
