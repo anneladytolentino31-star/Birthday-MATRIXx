@@ -456,7 +456,7 @@
           mode = "TEXT";
           textPixels = createTextPixels(textSequence[currentTextIndex]);
         }
-      }, 2500);
+      }, 1500);
     }
 
     /* ----------------------------------------------------
