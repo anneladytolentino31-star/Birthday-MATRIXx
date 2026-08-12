@@ -280,7 +280,7 @@
     </div>
 
     <div class="photo-card" id="slide-2">
-      <div class="card-date-header">AUGUST 12 2000</div>
+      <div class="card-date-header">26 YEARS OLD</div>
       <img src="image2.jpg" alt="Ailesmine Photo 2">
     </div>
 
