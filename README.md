@@ -60,6 +60,7 @@
       transition: all 0.8s ease-in-out;
       pointer-events: auto;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
@@ -73,6 +74,24 @@
     .photo-card.active {
       opacity: 1;
       transform: scale(1) rotate(0deg);
+    }
+
+    /* Styled Floating Date Above Pictures */
+    .card-date-header {
+      position: absolute;
+      top: -55px;
+      font-family: 'Cinzel', 'Trebuchet MS', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #ffe6f2;
+      text-shadow: 0 0 10px #ff007f, 0 0 20px #ff0055, 0 0 30px #ff3388;
+      background: rgba(20, 0, 10, 0.75);
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 1.5px solid rgba(255, 153, 204, 0.8);
+      box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+      white-space: nowrap;
     }
 
     /* Heart Collage Layout Container */
@@ -221,6 +240,11 @@
         width: 280px;
         height: 280px;
       }
+      .card-date-header {
+        font-size: 1rem;
+        top: -48px;
+        letter-spacing: 2px;
+      }
       #heart-container {
         transform: scale(0.8);
       }
@@ -248,9 +272,12 @@
 
   <div id="content-layer">
     <div class="photo-card" id="slide-1">
+      <div class="card-date-header">AUGUST 12 2000</div>
       <img src="image1.jpg" alt="Ailesmine Photo 1">
     </div>
+
     <div class="photo-card" id="slide-2">
+      <div class="card-date-header">AUGUST 12 2000</div>
       <img src="image2.jpg" alt="Ailesmine Photo 2">
     </div>
 
@@ -282,12 +309,12 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINEBIRTHDAY✨❤️";
+    const pinkMatrixChars = "AILESMINE💖💗🦋😍✨❤️💝";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
 
-    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "ATE", "AILESMINE", "❤️"];
+    const textSequence = ["3", "2", "1", "HAPPY", "BIRTHDAY", "MY", "ATE", "AILESMINE", "❤️"];
     let currentTextIndex = -1;
     let mode = "MATRIX"; 
     let textPixels = [];
@@ -416,7 +443,7 @@
        2. TIMELINE SEQUENCE CONTROLLER
        ---------------------------------------------------- */
     function startSequence() {
-      fluidAlpha = 0; // Keeps swirl hidden during matrix countdown
+      fluidAlpha = 0; 
 
       const textInterval = setInterval(() => {
         currentTextIndex++;
@@ -429,7 +456,7 @@
           mode = "TEXT";
           textPixels = createTextPixels(textSequence[currentTextIndex]);
         }
-      }, 1500);
+      }, 2000);
     }
 
     /* ----------------------------------------------------
