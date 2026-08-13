@@ -269,7 +269,7 @@
     <source src="daylight.mp3" type="audio/mpeg">
   </audio>
 
-  <button class="audio-btn" id="audio-toggle" onclick="toggleAudio()">⏸</button>
+  <button class="audio-btn" id="audio-toggle" onclick="toggleAudio()">🔊</button>
 
   <canvas id="bg-canvas"></canvas>
 
@@ -312,7 +312,7 @@
     window.addEventListener('resize', resize);
     resize();
 
-    const pinkMatrixChars = "AILESMINEBIRTHDAY✨❤️";
+    const pinkMatrixChars = "AILESMINEBIRTHDAY💗🎊✨❤️";
     const fontSize = 14;
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
@@ -570,7 +570,7 @@
       } else {
         bgMusic.play().then(() => {
           isPlaying = true;
-          document.getElementById('audio-toggle').textContent = '⏸';
+          document.getElementById('audio-toggle').textContent = '🔊';
         }).catch(() => {
           isPlaying = false;
         });
